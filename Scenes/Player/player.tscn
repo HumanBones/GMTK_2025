@@ -1,0 +1,100 @@
+[gd_scene load_steps=9 format=3 uid="uid://crwyrlb1rl3i3"]
+
+[ext_resource type="Script" uid="uid://bmewd56qfuyyf" path="res://Scenes/Player/player.gd" id="1_a3d8c"]
+[ext_resource type="Texture2D" uid="uid://cwxmr4ojjoqjw" path="res://Assets/Dwarf/dwarf x1.png" id="2_a3d8c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uvnfx"]
+size = Vector2(52, 60.25)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uvnfx"]
+radius = 19.0
+
+[sub_resource type="Animation" id="Animation_a3d8c"]
+resource_name = "walk"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_xpcdj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_mtuoh"]
+resource_name = "idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mtuoh"]
+_data = {
+&"RESET": SubResource("Animation_xpcdj"),
+&"idle": SubResource("Animation_mtuoh"),
+&"walk": SubResource("Animation_a3d8c")
+}
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_a3d8c")
+max_speed = 400.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("2_a3d8c")
+offset = Vector2(4, -15)
+hframes = 5
+vframes = 9
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+position = Vector2(2, -30.875)
+shape = SubResource("RectangleShape2D_uvnfx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -20)
+shape = SubResource("CircleShape2D_uvnfx")
+
+[node name="HealthManager" type="Node2D" parent="."]
+
+[node name="AttackManager" type="Node2D" parent="."]
+
+[node name="UpgradeManager" type="Node2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_mtuoh")
+}
