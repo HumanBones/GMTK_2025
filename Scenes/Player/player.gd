@@ -10,6 +10,7 @@ signal shoot(dir : Vector2)
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+
 var speed : float
 var direction : Vector2
 var is_moving : bool = false
@@ -89,4 +90,8 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		area.die()
 	
 	if area.is_in_group("Enemy"):
-		dmg_taken.emit(area.get_dmg())
+		dmg_taken.emit(area.get_parent().get_dmg())
+
+func die() ->void:
+	set_physics_process(false)
+	animation_player.stop()

@@ -68,7 +68,9 @@ _data = {
 &"walk": SubResource("Animation_a3d8c")
 }
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_a3d8c")
 max_speed = 400.0
 
@@ -79,7 +81,9 @@ offset = Vector2(0, -15)
 hframes = 5
 vframes = 9
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["Player"]]
+collision_layer = 2
+collision_mask = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(2, -30.875)
@@ -112,3 +116,4 @@ libraries = {
 position = Vector2(0, -21)
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="died" from="HealthManager" to="." method="die"]

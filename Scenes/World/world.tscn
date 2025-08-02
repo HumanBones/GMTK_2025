@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://cs31oac0cd7l1"]
+[gd_scene load_steps=5 format=3 uid="uid://cs31oac0cd7l1"]
 
 [ext_resource type="PackedScene" uid="uid://crwyrlb1rl3i3" path="res://Scenes/Player/player.tscn" id="1_t1gg8"]
 [ext_resource type="PackedScene" uid="uid://dxo1i3xrycwbj" path="res://Scenes/Camera/main_cam.tscn" id="2_yp2ti"]
+[ext_resource type="PackedScene" uid="uid://doeou8ka53jj4" path="res://Scenes/Enemy/enemy.tscn" id="3_3rhlx"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_yp2ti"]
+vertices = PackedVector2Array(1226.06, 713.961, 9.32812, 710.031, 32.6719, 13, 1230.93, 13)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(23, 3, 1241, 3, 1236, 724, -1, 720)])
 
 [node name="World" type="Node2D"]
 
@@ -17,3 +23,16 @@ max_follow_dist = 30.0
 [node name="EnemyHolder" type="Node2D" parent="."]
 
 [node name="BulletHolder" type="Node2D" parent="." groups=["BulletHolder"]]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(0, -1)
+navigation_polygon = SubResource("NavigationPolygon_yp2ti")
+
+[node name="Enemy" parent="." instance=ExtResource("3_3rhlx")]
+position = Vector2(159, 530)
+
+[node name="Enemy2" parent="." instance=ExtResource("3_3rhlx")]
+position = Vector2(1095, 131)
+
+[node name="Enemy3" parent="." instance=ExtResource("3_3rhlx")]
+position = Vector2(258, 134)

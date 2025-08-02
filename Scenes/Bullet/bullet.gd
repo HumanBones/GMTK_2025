@@ -24,6 +24,9 @@ func _physics_process(delta: float) -> void:
 func set_dmg(amount : float) ->void:
 	max_dmg = amount
 
+func get_dmg() -> float:
+	return dmg
+
 func die() -> void:
 	call_deferred("queue_free")
 
