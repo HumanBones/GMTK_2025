@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://bdb80a25gdtac"]
+
+[ext_resource type="Texture2D" uid="uid://bg58ud8wbnf20" path="res://Assets/Bullet/simple_bullet-Sheet.png" id="1_k7rnr"]
+[ext_resource type="Script" uid="uid://dnj3jc0p53itd" path="res://Scenes/Bullet/bullet.gd" id="1_lv0gj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lv0gj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nt0l2"]
+atlas = ExtResource("1_k7rnr")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0gc84"]
+atlas = ExtResource("1_k7rnr")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q443p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nt0l2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0gc84")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[node name="Bullet" type="Area2D"]
+script = ExtResource("1_lv0gj")
+max_speed = 500.0
+life_time = 10.0
+max_dmg = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_lv0gj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_q443p")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." groups=["Bullet"]]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

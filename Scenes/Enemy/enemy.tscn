@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://doeou8ka53jj4"]
+[gd_scene load_steps=6 format=3 uid="uid://doeou8ka53jj4"]
 
+[ext_resource type="Script" uid="uid://dw80smuh4et8c" path="res://Scenes/Enemy/enemy.gd" id="1_2t2r4"]
 [ext_resource type="Texture2D" uid="uid://7hab0jpsmglh" path="res://icon.svg" id="1_mw074"]
+[ext_resource type="PackedScene" uid="uid://dkc0ey8f5om64" path="res://Scenes/HelperNodes/health_manager.tscn" id="3_dmwl5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nvvbs"]
 size = Vector2(120, 119)
@@ -9,6 +11,7 @@ size = Vector2(120, 119)
 radius = 48.2597
 
 [node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_2t2r4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.755194, 0.0774716, 2.11775e-06, 1)
@@ -22,3 +25,9 @@ shape = SubResource("RectangleShape2D_nvvbs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_2t2r4")
+
+[node name="HealthManager" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("3_dmwl5")]
+max_hp = 5
+parent = NodePath("..")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

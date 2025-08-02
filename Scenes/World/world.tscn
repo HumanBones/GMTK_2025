@@ -1,8 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://cs31oac0cd7l1"]
+[gd_scene load_steps=3 format=3 uid="uid://cs31oac0cd7l1"]
 
 [ext_resource type="PackedScene" uid="uid://crwyrlb1rl3i3" path="res://Scenes/Player/player.tscn" id="1_t1gg8"]
+[ext_resource type="PackedScene" uid="uid://dxo1i3xrycwbj" path="res://Scenes/Camera/main_cam.tscn" id="2_yp2ti"]
 
 [node name="World" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_t1gg8")]
 position = Vector2(570, 360)
+
+[node name="MainCam" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_yp2ti")]
+target = NodePath("../Player")
+max_speed = 3.0
+max_acc = 1.0
+max_follow_dist = 30.0
+
+[node name="EnemyHolder" type="Node2D" parent="."]
+
+[node name="BulletHolder" type="Node2D" parent="." groups=["BulletHolder"]]
