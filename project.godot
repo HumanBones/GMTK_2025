@@ -39,6 +39,7 @@ EnemyHolder=""
 HPManager=""
 ParticleHolder=""
 PlayerUpgradeManager=""
+EnemyBullet=""
 
 [input]
 

@@ -4,6 +4,7 @@ class_name Enemy
 
 signal dmg_taken(amount)
 signal died(enemy : Enemy)
+signal shoot(dir : Vector2)
 
 const EXPLOSION = preload("res://Scenes/Particles/explosion.tscn")
 
@@ -16,9 +17,15 @@ const EXPLOSION = preload("res://Scenes/Particles/explosion.tscn")
 @export var max_attack_range_range : float
 @export var shake_death_amount : float
 @export var offset : float
+@export var attack_speed : float
 
+@onready var attack_manager: AttackManager = $AttackManager
+@onready var collision_shape_2d: CollisionShape2D = $Attack/CollisionShape2D
+@onready var attack: Area2D = $Attack
+@onready var timer: Timer = $Timer
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
 
+var is_attacking : bool = false
 var target : Player
 var speed : float
 var dist_to_target : float
@@ -28,10 +35,12 @@ var is_player_dead : bool = false
 var particle_holder : Node2D
 
 func _ready() -> void:
+	timer.wait_time = attack_speed
 	particle_holder = get_tree().get_first_node_in_group("ParticleHolder")
 	dmg = max_dmg
 	speed = max_speed
 	target = get_tree().get_first_node_in_group("Player")
+	collision_shape_2d.disabled = true
 	if is_ranged:
 		dist_to_target = max_target_dist_range
 	else:
@@ -50,7 +59,9 @@ func _physics_process(delta: float) -> void:
 	
 	else:
 		direction = Vector2.ZERO
-		attack()
+		var dir = target.global_position - Vector2(global_position.x,global_position.y+offset)
+		dir.normalized()
+		hit(dir)
 	
 	velocity = direction * speed
 	
@@ -65,8 +76,14 @@ func die() ->void:
 func get_dmg() -> float:
 	return dmg
 
-func attack() ->void:
-	pass
+func hit(dir : Vector2) ->void:
+	if is_ranged:
+		attack_manager.spawn_bullet(dir)
+		
+	else:
+		var angle = dir.angle()
+		attack.rotation = angle
+		collision_shape_2d.disabled = false
 
 func stop_all() ->void:
 	set_physics_process(false)
@@ -81,3 +98,13 @@ func spawn_particle() ->void:
 	var particle_inst = EXPLOSION.instantiate() as Explosion
 	particle_inst.global_position = self.global_position
 	particle_holder.add_child(particle_inst)
+
+func _on_timer_timeout() -> void:
+	is_attacking = true
+	collision_shape_2d.disabled = true
+
+func _on_attack_area_entered(area: Area2D) -> void:
+	if area.is_in_group("Player") && is_attacking:
+		area.get_parent().dmg_taken.emit(dmg)
+	is_attacking = false
+	timer.start()

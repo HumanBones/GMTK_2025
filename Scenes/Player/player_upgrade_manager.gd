@@ -7,7 +7,6 @@ class_name PlayerUpgradeManager
 @export var attack_manager : AttackManager
 
 
-
 func dmg(amount : float) ->void:
 	attack_manager.set_dmg(amount)
 	

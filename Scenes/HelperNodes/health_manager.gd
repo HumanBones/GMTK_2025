@@ -7,6 +7,7 @@ signal hp_rised
 signal died
 signal hp_changed(amount : float)
 signal init(hp : int)
+signal clear
 
 @export var max_hp : int
 @export var parent : CharacterBody2D
@@ -33,9 +34,8 @@ func max_hp_chaned(amount : int) ->void:
 func take_dmg(amount : int) ->void:
 	hp -= amount
 	GameManager.shake.emit(dmg_shake_amount)
-	if hp < 0:
+	if hp <= 0:
 		died.emit()
-	
 	hp_changed.emit(hp)
 	update_label(amount)
 
@@ -57,6 +57,7 @@ func set_hp(amount : int) ->void:
 	hp = max_hp
 	update_label(hp)
 	hp_changed.emit(hp)
+	clear.emit()
 	init.emit(hp)
 
 func reset_everything() ->void:

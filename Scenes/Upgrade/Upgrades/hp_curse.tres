@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=3 format=3 uid="uid://cpohtigrprv51"]
+
+[ext_resource type="Script" uid="uid://v5wtpe7mpgpu" path="res://Scenes/Upgrade/upgrade.gd" id="1_371tq"]
+[ext_resource type="Texture2D" uid="uid://7hab0jpsmglh" path="res://icon.svg" id="1_yhrxw"]
+
+[resource]
+script = ExtResource("1_371tq")
+description = "1 HP but 2x DMG"
+icon = ExtResource("1_yhrxw")
+effect_type = "dmg"
+effect_value = 2.0
+side_effect_type = "hp"
+side_effect_valu = 1.0
+metadata/_custom_type_script = "uid://v5wtpe7mpgpu"

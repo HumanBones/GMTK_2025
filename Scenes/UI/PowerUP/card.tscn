@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://n12xwm88narn"]
+[gd_scene load_steps=6 format=3 uid="uid://n12xwm88narn"]
 
 [ext_resource type="Texture2D" uid="uid://7hab0jpsmglh" path="res://icon.svg" id="1_cgjda"]
 [ext_resource type="Script" uid="uid://dkuel4txdi3fh" path="res://Scenes/UI/PowerUP/card.gd" id="1_y56qg"]
+[ext_resource type="Script" uid="uid://v5wtpe7mpgpu" path="res://Scenes/Upgrade/upgrade.gd" id="2_8sdda"]
 [ext_resource type="Theme" uid="uid://cp8rcvowk1kbc" path="res://Scenes/UI/KillCount/kill_count.tres" id="3_i1su1"]
+[ext_resource type="Resource" uid="uid://cpohtigrprv51" path="res://Scenes/Upgrade/Upgrades/hp_curse.tres" id="3_smbx3"]
 
 [node name="Card" type="Control"]
 layout_mode = 3
@@ -14,6 +16,9 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_y56qg")
+upgrade_list = Array[ExtResource("2_8sdda")]([ExtResource("3_smbx3")])
+curse_list = Array[ExtResource("2_8sdda")]([ExtResource("3_smbx3")])
+curse_chance = 0.5
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1

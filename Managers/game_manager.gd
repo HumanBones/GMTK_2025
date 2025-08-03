@@ -4,6 +4,7 @@ signal looping
 signal start
 signal end
 signal pause
+signal win
 signal shake(amount : float)
 
 enum GameState {

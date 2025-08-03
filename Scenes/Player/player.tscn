@@ -122,5 +122,6 @@ libraries = {
 position = Vector2(0, -21)
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="clear" from="HealthManager" to="." method="clear_ui"]
 [connection signal="died" from="HealthManager" to="." method="die"]
 [connection signal="init" from="HealthManager" to="." method="init_health_ui"]

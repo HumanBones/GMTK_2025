@@ -36,7 +36,10 @@ func spawning_finished() ->bool:
 	return true
 
 func clear_enemies() ->void:
+
 	for enemy in enemy_list:
+		if enemy == null:
+			return
 		enemy.queue_free()
 	
 	enemy_list.clear()

@@ -38,3 +38,4 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 
 func set_bullet_speed(amount : float) ->void:
 	max_speed = amount
+	speed = max_speed

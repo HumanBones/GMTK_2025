@@ -8,6 +8,7 @@ signal shoot(dir : Vector2)
 signal player_dead
 signal init_ui(hp : int)
 signal reset
+signal clear
 
 @export var max_speed : float
 
@@ -114,6 +115,9 @@ func die() ->void:
 func set_speed(amount : float) ->void:
 	max_speed *= amount
 	speed = max_speed
+
+func clear_ui() ->void:
+	clear.emit()
 
 func init_health_ui(hp : int) ->void:
 	init_ui.emit(hp)

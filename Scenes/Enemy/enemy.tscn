@@ -1,14 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://doeou8ka53jj4"]
+[gd_scene load_steps=9 format=3 uid="uid://doeou8ka53jj4"]
 
 [ext_resource type="Script" uid="uid://dw80smuh4et8c" path="res://Scenes/Enemy/enemy.gd" id="1_2t2r4"]
 [ext_resource type="Texture2D" uid="uid://7hab0jpsmglh" path="res://icon.svg" id="1_mw074"]
 [ext_resource type="PackedScene" uid="uid://dkc0ey8f5om64" path="res://Scenes/HelperNodes/health_manager.tscn" id="3_dmwl5"]
+[ext_resource type="PackedScene" uid="uid://cpakeh41fkk5s" path="res://Scenes/HelperNodes/attack_manager.tscn" id="4_dmwl5"]
+[ext_resource type="PackedScene" uid="uid://cj5x3bpq0v8jf" path="res://Scenes/Bullet/enemy_bullet.tscn" id="5_d40jh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nvvbs"]
 size = Vector2(120, 119)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2t2r4"]
 radius = 48.2597
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d40jh"]
+size = Vector2(100, 20)
 
 [node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
 collision_layer = 4
@@ -18,9 +23,10 @@ max_speed = 100.0
 max_target_dist_melee = 100.0
 max_target_dist_range = 200.0
 max_attack_range_melee = 80.0
-max_attack_range_range = 180.0
+max_attack_range_range = 200.0
 shake_death_amount = 4.0
-offset = 32.0
+offset = 20.0
+attack_speed = 1.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.755194, 0.0774716, 2.11775e-06, 1)
@@ -38,16 +44,39 @@ shape = SubResource("RectangleShape2D_nvvbs")
 shape = SubResource("CircleShape2D_2t2r4")
 
 [node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(92, 0)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 avoidance_enabled = true
-radius = 30.0
+radius = 300.0
 
 [node name="HealthManager" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("3_dmwl5")]
 max_hp = 5
 parent = NodePath("..")
 dmg_shake_amount = 1.0
 
+[node name="AttackManager" parent="." node_paths=PackedStringArray("parent", "shoot_position") instance=ExtResource("4_dmwl5")]
+bullet = ExtResource("5_d40jh")
+parent = NodePath("..")
+max_dmg = 1.0
+attack_speed = 1.0
+shoot_position = NodePath("../Marker2D")
+bullet_speed = 10.0
+
+[node name="Attack" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack"]
+position = Vector2(88, 0)
+shape = SubResource("RectangleShape2D_d40jh")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="died" from="HealthManager" to="." method="die"]
 [connection signal="hp_changed" from="HealthManager" to="." method="_on_health_manager_2_hp_changed"]
+[connection signal="area_entered" from="Attack" to="." method="_on_attack_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
