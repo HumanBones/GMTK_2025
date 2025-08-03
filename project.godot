@@ -15,6 +15,14 @@ run/main_scene="uid://cs31oac0cd7l1"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameManager="*res://Managers/game_manager.gd"
+SpawnManager="*res://Managers/spawn_manager.gd"
+UpgradeManager="*res://Managers/upgrade_manager.gd"
+LoopManager="*res://Managers/loop_manager.gd"
+SceneManager="*res://Managers/scene_manager.gd"
+
 [display]
 
 window/size/viewport_width=1240
@@ -27,6 +35,10 @@ Bullet="Group for bullet"
 BulletHolder=""
 Player=""
 Enemy=""
+EnemyHolder=""
+HPManager=""
+ParticleHolder=""
+PlayerUpgradeManager=""
 
 [input]
 

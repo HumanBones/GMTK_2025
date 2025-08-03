@@ -3,7 +3,11 @@ extends CharacterBody2D
 class_name Player
 
 signal dmg_taken(amount : int)
+signal healed(amount : int)
 signal shoot(dir : Vector2)
+signal player_dead
+signal init_ui(hp : int)
+signal reset
 
 @export var max_speed : float
 
@@ -15,9 +19,13 @@ var speed : float
 var direction : Vector2
 var is_moving : bool = false
 var shoot_dir : Vector2 = Vector2.ZERO
+var cur_spawn_pos : Vector2
 
 func _ready() -> void:
 	speed = max_speed
+	cur_spawn_pos = global_position
+	GameManager.looping.connect(reset_everything)
+	GameManager.start.connect(resume_everything)
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("restart"):
@@ -69,7 +77,6 @@ func handle_animations() ->void:
 		animation_player.play("walk")
 	else:
 		animation_player.play("idle")
-		
 
 func handle_sprite_flip() ->void:
 	if direction.x < 0:
@@ -82,7 +89,6 @@ func handle_shoot_sprie_flip(amount: int) ->void:
 		sprite_2d.flip_h = true
 	if amount > 0:
 		sprite_2d.flip_h = false
-		
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("EnemyBullet"):
@@ -92,6 +98,22 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Enemy"):
 		dmg_taken.emit(area.get_parent().get_dmg())
 
+func reset_everything() ->void:
+	global_position = cur_spawn_pos
+	reset.emit()
+
+func resume_everything() ->void:
+	set_physics_process(true)
+
 func die() ->void:
+	player_dead.emit()
+	GameManager.looping.emit()
 	set_physics_process(false)
 	animation_player.stop()
+	
+func set_speed(amount : float) ->void:
+	max_speed *= amount
+	speed = max_speed
+
+func init_health_ui(hp : int) ->void:
+	init_ui.emit(hp)

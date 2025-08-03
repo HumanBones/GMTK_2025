@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cs31oac0cd7l1"]
+[gd_scene load_steps=8 format=3 uid="uid://cs31oac0cd7l1"]
 
 [ext_resource type="PackedScene" uid="uid://crwyrlb1rl3i3" path="res://Scenes/Player/player.tscn" id="1_t1gg8"]
 [ext_resource type="PackedScene" uid="uid://dxo1i3xrycwbj" path="res://Scenes/Camera/main_cam.tscn" id="2_yp2ti"]
 [ext_resource type="PackedScene" uid="uid://doeou8ka53jj4" path="res://Scenes/Enemy/enemy.tscn" id="3_3rhlx"]
+[ext_resource type="PackedScene" uid="uid://cav0frxsq0mtm" path="res://Scenes/HelperNodes/enemy_spawner.tscn" id="3_vadfg"]
+[ext_resource type="PackedScene" uid="uid://ck1o6bk8fpus6" path="res://Scenes/UI/PowerUP/power_up.tscn" id="5_l1hd3"]
+[ext_resource type="PackedScene" uid="uid://bsgjsbkb5m1br" path="res://Scenes/UI/HearthUI/health_ui.tscn" id="6_adcqc"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_yp2ti"]
 vertices = PackedVector2Array(1226.06, 713.961, 9.32812, 710.031, 32.6719, 13, 1230.93, 13)
@@ -10,6 +13,13 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(23, 3, 1241, 3, 1236, 724, -1, 720)])
 
 [node name="World" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PowerUP" parent="CanvasLayer" instance=ExtResource("5_l1hd3")]
+visible = false
+
+[node name="HealthUI" parent="CanvasLayer" instance=ExtResource("6_adcqc")]
 
 [node name="Player" parent="." instance=ExtResource("1_t1gg8")]
 position = Vector2(570, 360)
@@ -19,8 +29,10 @@ target = NodePath("../Player")
 max_speed = 3.0
 max_acc = 1.0
 max_follow_dist = 30.0
+shake_amount = 8.0
+shake_decay = 8.0
 
-[node name="EnemyHolder" type="Node2D" parent="."]
+[node name="EnemyHolder" type="Node2D" parent="." groups=["EnemyHolder"]]
 
 [node name="BulletHolder" type="Node2D" parent="." groups=["BulletHolder"]]
 
@@ -28,11 +40,18 @@ max_follow_dist = 30.0
 position = Vector2(0, -1)
 navigation_polygon = SubResource("NavigationPolygon_yp2ti")
 
-[node name="Enemy" parent="." instance=ExtResource("3_3rhlx")]
-position = Vector2(159, 530)
+[node name="EnemySpawner" parent="." instance=ExtResource("3_vadfg")]
+position = Vector2(430, 403)
+enemy_scene = ExtResource("3_3rhlx")
+enemy_to_spawn = 3
+spawn_rate = 1.0
 
-[node name="Enemy2" parent="." instance=ExtResource("3_3rhlx")]
-position = Vector2(1095, 131)
+[node name="LoopTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
 
-[node name="Enemy3" parent="." instance=ExtResource("3_3rhlx")]
-position = Vector2(258, 134)
+[node name="ParticleHolder" type="Node2D" parent="." groups=["ParticleHolder"]]
+
+[connection signal="dmg_taken" from="Player" to="CanvasLayer/HealthUI" method="hp_lowered"]
+[connection signal="init_ui" from="Player" to="CanvasLayer/HealthUI" method="init_ui"]
+[connection signal="reset" from="Player" to="CanvasLayer/HealthUI" method="reset"]

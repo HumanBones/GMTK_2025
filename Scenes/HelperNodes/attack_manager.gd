@@ -39,7 +39,14 @@ func spawn_bullet(dir : Vector2) ->void:
 	bullet_holder.add_child(bullet_inst)
 	can_attack = false
 	timer.start()
-	
+
+func set_attack_speed(amount : float) ->void:
+	attack_speed *= amount
+	timer.wait_time = attack_speed
+
+func set_dmg(amount : float) ->void:
+	max_dmg *= amount
+	dmg = max_dmg
 
 func _on_timer_timeout() -> void:
 	can_attack = true

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://ygh1b7jfhgnt"]
+
+[ext_resource type="Texture2D" uid="uid://cemjo2etswjcu" path="res://Assets/UI/hearth_ui_empty.png" id="1_q60an"]
+[ext_resource type="Script" uid="uid://c2887sdhhlnxj" path="res://Scenes/UI/HearthUI/hearth_ui.gd" id="2_7j2pu"]
+
+[node name="HearthUI" type="TextureRect"]
+custom_minimum_size = Vector2(64, 64)
+mouse_filter = 2
+texture = ExtResource("1_q60an")
+stretch_mode = 4
+script = ExtResource("2_7j2pu")

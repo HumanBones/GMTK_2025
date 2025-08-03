@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvjryiiq1maop"]
+
+[ext_resource type="Script" uid="uid://sbdr705a7mdm" path="res://Scenes/Particles/explosion.gd" id="1_trwrv"]
+
+[node name="Explosion" type="CPUParticles2D"]
+emitting = false
+amount = 15
+lifetime = 0.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+randomness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+scale_amount_min = 2.0
+scale_amount_max = 5.0
+color = Color(1, 0.388235, 0.360784, 1)
+script = ExtResource("1_trwrv")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

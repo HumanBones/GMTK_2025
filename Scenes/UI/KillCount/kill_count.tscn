@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnxxjwbv5ppli"]
+
+[ext_resource type="Theme" uid="uid://cp8rcvowk1kbc" path="res://Scenes/UI/KillCount/kill_count.tres" id="1_a0pnv"]
+
+[node name="KillCount" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_a0pnv")
+text = "999
+"

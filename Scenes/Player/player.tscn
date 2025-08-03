@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://crwyrlb1rl3i3"]
+[gd_scene load_steps=13 format=3 uid="uid://crwyrlb1rl3i3"]
 
 [ext_resource type="Script" uid="uid://bmewd56qfuyyf" path="res://Scenes/Player/player.gd" id="1_a3d8c"]
 [ext_resource type="Texture2D" uid="uid://cwxmr4ojjoqjw" path="res://Assets/Dwarf/dwarf x1.png" id="2_a3d8c"]
 [ext_resource type="PackedScene" uid="uid://dkc0ey8f5om64" path="res://Scenes/HelperNodes/health_manager.tscn" id="3_xpcdj"]
 [ext_resource type="PackedScene" uid="uid://cpakeh41fkk5s" path="res://Scenes/HelperNodes/attack_manager.tscn" id="4_mtuoh"]
 [ext_resource type="PackedScene" uid="uid://bdb80a25gdtac" path="res://Scenes/Bullet/bullet.tscn" id="5_htcer"]
+[ext_resource type="Script" uid="uid://bog1v1rjqd046" path="res://Scenes/Player/player_upgrade_manager.gd" id="6_dd0ac"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uvnfx"]
 size = Vector2(52, 60.25)
@@ -96,6 +97,7 @@ shape = SubResource("CircleShape2D_uvnfx")
 [node name="HealthManager" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("3_xpcdj")]
 max_hp = 3
 parent = NodePath("..")
+dmg_shake_amount = 2.0
 
 [node name="AttackManager" parent="." node_paths=PackedStringArray("parent", "shoot_position") instance=ExtResource("4_mtuoh")]
 bullet = ExtResource("5_htcer")
@@ -105,7 +107,11 @@ attack_speed = 0.5
 shoot_position = NodePath("../Marker2D")
 bullet_speed = 900.0
 
-[node name="UpgradeManager" type="Node2D" parent="."]
+[node name="UpgradeManager" type="Node2D" parent="." node_paths=PackedStringArray("health_manager", "player", "attack_manager") groups=["PlayerUpgradeManager"]]
+script = ExtResource("6_dd0ac")
+health_manager = NodePath("../HealthManager")
+player = NodePath("..")
+attack_manager = NodePath("../AttackManager")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -117,3 +123,4 @@ position = Vector2(0, -21)
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="died" from="HealthManager" to="." method="die"]
+[connection signal="init" from="HealthManager" to="." method="init_health_ui"]

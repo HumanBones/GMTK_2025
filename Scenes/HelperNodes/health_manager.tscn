@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://clwa68jvverhh" path="res://Scenes/HelperNodes/health_manager.gd" id="1_relar"]
 
-[node name="HealthManager" type="Node2D"]
+[node name="HealthManager" type="Node2D" groups=["HPManager"]]
 script = ExtResource("1_relar")
 
 [node name="Label" type="Label" parent="."]
