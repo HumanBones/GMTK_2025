@@ -7,23 +7,25 @@ signal died(enemy : Enemy)
 signal shoot(dir : Vector2)
 
 const EXPLOSION = preload("res://Scenes/Particles/explosion.tscn")
+const DEATH = preload("res://Scenes/UI/death.tscn")
 
 @export var max_dmg : float
 @export var max_speed : float
 @export var is_ranged : bool
 @export var max_target_dist_melee : float
 @export var max_target_dist_range : float
-@export var max_attack_range_melee : float
-@export var max_attack_range_range : float
 @export var shake_death_amount : float
 @export var offset : float
 @export var attack_speed : float
+
+
 
 @onready var attack_manager: AttackManager = $AttackManager
 @onready var collision_shape_2d: CollisionShape2D = $Attack/CollisionShape2D
 @onready var attack: Area2D = $Attack
 @onready var timer: Timer = $Timer
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
+@onready var sprite_2d: Sprite2D = $Sprite2D
 
 var is_attacking : bool = false
 var target : Player
@@ -46,7 +48,7 @@ func _ready() -> void:
 	else:
 		dist_to_target = max_target_dist_melee
 		
-	GameManager.looping.connect(stop_all)
+	GameManager.pause.connect(stop_all)
 
 func _physics_process(delta: float) -> void:
 	if target == null:
@@ -62,13 +64,16 @@ func _physics_process(delta: float) -> void:
 		var dir = target.global_position - Vector2(global_position.x,global_position.y+offset)
 		dir.normalized()
 		hit(dir)
-	
+		
+	flip_sprite(direction)
 	velocity = direction * speed
 	
 	move_and_slide()
 
 func die() ->void:
 	spawn_particle()
+	var sound_fx = DEATH.instantiate()
+	get_tree().get_first_node_in_group("BulletHolder").call_deferred("add_child",sound_fx)
 	GameManager.shake.emit(shake_death_amount)
 	died.emit(self)
 	call_deferred("queue_free")
@@ -80,7 +85,7 @@ func hit(dir : Vector2) ->void:
 	if is_ranged:
 		attack_manager.spawn_bullet(dir)
 		
-	else:
+	if !is_ranged:
 		var angle = dir.angle()
 		attack.rotation = angle
 		collision_shape_2d.disabled = false
@@ -102,6 +107,15 @@ func spawn_particle() ->void:
 func _on_timer_timeout() -> void:
 	is_attacking = true
 	collision_shape_2d.disabled = true
+
+func flip_sprite(dir : Vector2) ->void:
+	if dir.x < 0 :
+		sprite_2d.flip_h = true
+		
+	if dir.x > 0:
+		sprite_2d.flip_h = false
+		
+	
 
 func _on_attack_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Player") && is_attacking:

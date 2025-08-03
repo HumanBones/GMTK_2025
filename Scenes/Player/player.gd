@@ -25,13 +25,13 @@ var cur_spawn_pos : Vector2
 func _ready() -> void:
 	speed = max_speed
 	cur_spawn_pos = global_position
-	GameManager.looping.connect(reset_everything)
+	GameManager.pause.connect(reset_everything)
+	GameManager.looping.connect(reset_hp)
 	GameManager.start.connect(resume_everything)
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("restart"):
-		get_tree().reload_current_scene()
-	
+	if Input.is_action_just_pressed("quit"):
+		get_tree().quit()
 
 func _physics_process(delta: float) -> void:
 	move_input()
@@ -101,6 +101,8 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 func reset_everything() ->void:
 	global_position = cur_spawn_pos
+
+func reset_hp() ->void:
 	reset.emit()
 
 func resume_everything() ->void:
@@ -108,7 +110,7 @@ func resume_everything() ->void:
 
 func die() ->void:
 	player_dead.emit()
-	GameManager.looping.emit()
+	GameManager.pause.emit()
 	set_physics_process(false)
 	animation_player.stop()
 	

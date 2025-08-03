@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://derbx0c5nj6bw"
+path="res://.godot/imported/Wet Break 6.wav-0dff9b55c0311842cd5fd37843b78b66.sample"
+
+[deps]
+
+source_file="res://Assets/SFX/Wet Break 6.wav"
+dest_files=["res://.godot/imported/Wet Break 6.wav-0dff9b55c0311842cd5fd37843b78b66.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

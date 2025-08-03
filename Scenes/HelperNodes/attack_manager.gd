@@ -10,6 +10,7 @@ class_name AttackManager
 @export var bullet_speed : float
 
 @onready var timer: Timer = $Timer
+@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 var dmg : float
 var can_attack : bool = true
@@ -30,7 +31,8 @@ func spawn_bullet(dir : Vector2) ->void:
 		return
 	if !can_attack:
 		return
-		
+	
+	audio_stream_player_2d.play()
 	var bullet_inst = bullet.instantiate() as Bullet
 	bullet_inst.set_dmg(dmg)
 	bullet_inst.set_bullet_speed(bullet_speed)

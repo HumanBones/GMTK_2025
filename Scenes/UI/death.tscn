@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2nnyv0q2ldee"]
+
+[ext_resource type="AudioStream" uid="uid://cccv7sc6fe1ft" path="res://Assets/SFX/Wet Break 2.wav" id="1_6dn5q"]
+[ext_resource type="Script" uid="uid://bvrne1p6hl8yg" path="res://Scenes/UI/death.gd" id="2_6dn5q"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_tpomm"]
+streams_count = 1
+stream_0/stream = ExtResource("1_6dn5q")
+
+[node name="Death" type="AudioStreamPlayer2D"]
+stream = SubResource("AudioStreamRandomizer_tpomm")
+autoplay = true
+script = ExtResource("2_6dn5q")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

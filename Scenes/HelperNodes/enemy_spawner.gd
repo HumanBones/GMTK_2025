@@ -2,10 +2,12 @@ extends Node2D
 
 class_name EnemySpawner
 
-@export var enemy_scene : PackedScene
+const ENEMY = preload("res://Scenes/Enemy/enemy.tscn")
+const RANGE_ENEMY = preload("res://Scenes/WinScene/range_enemy.tscn")
 @export var spawn_range : float
 @export var enemy_to_spawn : int
 @export var spawn_rate : float
+@export var chance : float 
 
 @onready var timer: Timer = $Timer
 
@@ -14,24 +16,29 @@ var enemy_holder : Node2D
 var finished : bool = false
 var can_spawn : bool = true
 
+
 func _ready() -> void:
 	enemy_holder = get_tree().get_first_node_in_group("EnemyHolder")
 	timer.wait_time = spawn_rate
 	SpawnManager.add_spawner(self)
 	SpawnManager.next_wave.connect(next_wave)
-	GameManager.looping.connect(reset_spawner)
+	GameManager.pause.connect(reset_spawner)
 	GameManager.start.connect(resume_spawner)
 
 func spawn_enemy() ->void:
 	if !can_spawn:
 		return
-	var enemy_inst = enemy_scene.instantiate() as Enemy
+	var enemy_inst : Enemy
+	if randf() < chance:
+		enemy_inst = RANGE_ENEMY.instantiate() as Enemy
+	else:
+		enemy_inst = ENEMY.instantiate() as Enemy
+		
 	enemy_inst.global_position = get_spawn_point()
 	enemy_holder.add_child(enemy_inst)
 	SpawnManager.enemy_spawned(enemy_inst)
 	enemy_inst.died.connect(SpawnManager.enemy_died)
 
-	
 	spawned_enemies += 1
 	
 	if spawned_enemies < enemy_to_spawn:

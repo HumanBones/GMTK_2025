@@ -6,6 +6,7 @@
 script = ExtResource("1_relar")
 
 [node name="Label" type="Label" parent="."]
+visible = false
 offset_left = -18.0
 offset_top = -102.0
 offset_right = 22.0

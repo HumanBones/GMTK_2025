@@ -1,7 +1,8 @@
 extends Node
 
-signal next_wave
+signal next_wave(amount : int)
 signal waves_finished
+signal enemy_killed(amount : int)
 
 var wave_amount : int = 2
 var cur_wave : int = 0
@@ -11,7 +12,7 @@ var spawner_list : Array[EnemySpawner]
 var is_spawning_finished : bool = false
 
 func _ready() -> void:
-	GameManager.looping.connect(clear_enemies)
+	GameManager.pause.connect(clear_enemies)
 
 func add_spawner(spawner : EnemySpawner) ->void:
 	spawner_list.append(spawner)
@@ -22,17 +23,19 @@ func enemy_spawned(enemy_inst :Enemy) ->void:
 func enemy_died(enemy_inst : Enemy) ->void:
 	enemy_list.erase(enemy_inst)
 	enemy_kill_count += 1
+	enemy_killed.emit(enemy_kill_count)
 	if enemy_list.is_empty() && spawning_finished():
-		print("next wave")
 		if cur_wave < wave_amount:
 			cur_wave += 1
-			print("cur_wave",cur_wave)
-			next_wave.emit()
+			next_wave.emit(cur_wave)
+		else:
+			SceneManager.change_win_scene()
 
 func spawning_finished() ->bool:
 	for spawner in spawner_list:
-		if spawner.finished == false:
-			return false
+		if spawner != null:
+			if spawner.finished == false:
+				return false
 	return true
 
 func clear_enemies() ->void:

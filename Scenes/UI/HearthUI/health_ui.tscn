@@ -1,12 +1,28 @@
-[gd_scene load_steps=7 format=3 uid="uid://bsgjsbkb5m1br"]
+[gd_scene load_steps=8 format=3 uid="uid://bsgjsbkb5m1br"]
 
 [ext_resource type="Script" uid="uid://i0nvemwnbn3d" path="res://Scenes/UI/HearthUI/health_ui.gd" id="1_o1i6h"]
+[ext_resource type="Theme" uid="uid://cp8rcvowk1kbc" path="res://Scenes/UI/KillCount/kill_count.tres" id="2_o1i6h"]
 
 [sub_resource type="Gradient" id="Gradient_5nolj"]
 colors = PackedColorArray(1, 0, 0, 0.313726, 0.6, 0.00392157, 0, 0.458824)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_o1i6h"]
 gradient = SubResource("Gradient_5nolj")
+
+[sub_resource type="Animation" id="Animation_o1i6h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_5nolj"]
 resource_name = "fade_out"
@@ -22,21 +38,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_o1i6h"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cca7r"]
@@ -65,6 +66,21 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = SubResource("GradientTexture2D_o1i6h")
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 1
+offset_right = 112.0
+offset_bottom = 75.0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Label" type="Label" parent="MarginContainer2"]
+layout_mode = 2
+theme = ExtResource("2_o1i6h")
+theme_override_font_sizes/font_size = 64
+text = "Kills:"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1

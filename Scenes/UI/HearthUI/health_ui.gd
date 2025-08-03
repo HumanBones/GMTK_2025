@@ -7,12 +7,18 @@ const HEARTH_UI = preload("res://Scenes/UI/HearthUI/hearth_ui.tscn")
 @onready var container: HBoxContainer = $MarginContainer/Container
 @onready var texture_rect: TextureRect = $TextureRect
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var label: Label = $MarginContainer2/Label
 
 
 
 var hearth_list : Array[Hearth]
 var hp_manager : HealthManager
 
+func _ready() -> void:
+	SpawnManager.enemy_killed.connect(update_kill_label)
+	
+func update_kill_label(amount : int) ->void:
+	label.text = "Kills: " + str(amount) 
 	
 func init_ui(hp : int) ->void:
 	for h in hp:

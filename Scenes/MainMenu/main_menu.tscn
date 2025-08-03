@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://nw5pqvsql4rl"]
+[gd_scene load_steps=6 format=3 uid="uid://nw5pqvsql4rl"]
 
 [ext_resource type="Theme" uid="uid://cp8rcvowk1kbc" path="res://Scenes/UI/KillCount/kill_count.tres" id="1_uqdog"]
 [ext_resource type="Script" uid="uid://ckaypodkidgfu" path="res://Scenes/MainMenu/main_menu.gd" id="1_v763k"]
 [ext_resource type="Texture2D" uid="uid://nvtbpg7b46dp" path="res://Assets/Background/LoopDungeon_background.png" id="2_qgdf6"]
 [ext_resource type="Texture2D" uid="uid://iyhubv8scryx" path="res://Assets/Background/LoopDungeon_title.png" id="3_0qgbs"]
+[ext_resource type="AudioStream" uid="uid://dmjb6o7wd21h2" path="res://Assets/SFX/Loop-Menu.wav" id="5_adu2g"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -72,6 +73,10 @@ layout_mode = 2
 theme = ExtResource("1_uqdog")
 theme_override_font_sizes/font_size = 46
 text = "Quit"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_adu2g")
+autoplay = true
 
 [connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

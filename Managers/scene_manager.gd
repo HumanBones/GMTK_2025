@@ -15,4 +15,4 @@ func change_menu_scene() ->void:
 	get_tree().change_scene_to_packed(MAIN_MENU)
 
 func change_win_scene() ->void:
-	get_tree().change_scene_to_packed(WIN_PAGE)
+	get_tree().call_deferred("change_scene_to_packed",WIN_PAGE)
