@@ -43,12 +43,15 @@ func spawn_bullet(dir : Vector2) ->void:
 	timer.start()
 
 func set_attack_speed(amount : float) ->void:
-	attack_speed *= amount
+	attack_speed /= amount
 	timer.wait_time = attack_speed
 
 func set_dmg(amount : float) ->void:
 	max_dmg *= amount
 	dmg = max_dmg
+	if dmg < 0:
+		max_dmg = 1
+		dmg = max_dmg
 
 func _on_timer_timeout() -> void:
 	can_attack = true

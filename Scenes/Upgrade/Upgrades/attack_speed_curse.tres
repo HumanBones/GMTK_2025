@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=3 format=3 uid="uid://b51kvo4mrv7vt"]
+
+[ext_resource type="Texture2D" uid="uid://7hab0jpsmglh" path="res://icon.svg" id="1_07yaf"]
+[ext_resource type="Script" uid="uid://v5wtpe7mpgpu" path="res://Scenes/Upgrade/upgrade.gd" id="1_diicc"]
+
+[resource]
+script = ExtResource("1_diicc")
+description = "Attacl speed x2 but speed lowered"
+icon = ExtResource("1_07yaf")
+effect_type = "attack_speed"
+effect_value = 2.0
+side_effect_type = "speed"
+side_effect_valu = 0.5
+metadata/_custom_type_script = "uid://v5wtpe7mpgpu"

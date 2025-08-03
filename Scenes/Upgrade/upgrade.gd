@@ -17,3 +17,19 @@ func apply_upgrade() ->void:
 			UpgradeManager.dmg(effect_value,self)
 			if side_effect_type == "hp":
 				UpgradeManager.hp(int(side_effect_valu),self)
+			else:
+				pass
+		"speed":
+			UpgradeManager.speed(effect_value,self)
+			if side_effect_type == "dmg":
+				UpgradeManager.dmg(side_effect_valu,self)
+			else:
+				pass
+		"attack_speed":
+			UpgradeManager.attack_speed(effect_value,self)
+			if side_effect_type == "speed":
+				UpgradeManager.speed(side_effect_valu,self)
+			else:
+				pass
+			
+			

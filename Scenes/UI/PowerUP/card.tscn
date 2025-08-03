@@ -1,10 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://n12xwm88narn"]
+[gd_scene load_steps=11 format=3 uid="uid://n12xwm88narn"]
 
 [ext_resource type="Texture2D" uid="uid://7hab0jpsmglh" path="res://icon.svg" id="1_cgjda"]
 [ext_resource type="Script" uid="uid://dkuel4txdi3fh" path="res://Scenes/UI/PowerUP/card.gd" id="1_y56qg"]
 [ext_resource type="Script" uid="uid://v5wtpe7mpgpu" path="res://Scenes/Upgrade/upgrade.gd" id="2_8sdda"]
 [ext_resource type="Theme" uid="uid://cp8rcvowk1kbc" path="res://Scenes/UI/KillCount/kill_count.tres" id="3_i1su1"]
 [ext_resource type="Resource" uid="uid://cpohtigrprv51" path="res://Scenes/Upgrade/Upgrades/hp_curse.tres" id="3_smbx3"]
+[ext_resource type="Resource" uid="uid://b8iyqrlmt22cm" path="res://Scenes/Upgrade/Upgrades/dmg_up.tres" id="3_usyle"]
+[ext_resource type="Resource" uid="uid://cjj40hcljnged" path="res://Scenes/Upgrade/Upgrades/speed_up.tres" id="4_6b7w3"]
+[ext_resource type="Resource" uid="uid://7kxnvhhtglky" path="res://Scenes/Upgrade/Upgrades/attack_up.tres" id="5_qkc2v"]
+[ext_resource type="Resource" uid="uid://bdlef15notvmf" path="res://Scenes/Upgrade/Upgrades/speed_curse.tres" id="6_qkc2v"]
+[ext_resource type="Resource" uid="uid://b51kvo4mrv7vt" path="res://Scenes/Upgrade/Upgrades/attack_speed_curse.tres" id="8_mplem"]
 
 [node name="Card" type="Control"]
 layout_mode = 3
@@ -16,9 +21,9 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_y56qg")
-upgrade_list = Array[ExtResource("2_8sdda")]([ExtResource("3_smbx3")])
-curse_list = Array[ExtResource("2_8sdda")]([ExtResource("3_smbx3")])
-curse_chance = 0.5
+upgrade_list = Array[ExtResource("2_8sdda")]([ExtResource("3_usyle"), ExtResource("4_6b7w3"), ExtResource("5_qkc2v")])
+curse_list = Array[ExtResource("2_8sdda")]([ExtResource("3_smbx3"), ExtResource("6_qkc2v"), ExtResource("8_mplem")])
+curse_chance = 0.3
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1

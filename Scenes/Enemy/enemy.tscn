@@ -15,9 +15,6 @@ radius = 20.025
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d40jh"]
 size = Vector2(69, 20)
 
-[sub_resource type="Animation" id="Animation_pqgp3"]
-resource_name = "attack"
-
 [sub_resource type="Animation" id="Animation_d40jh"]
 length = 0.001
 tracks/0/type = "value"
@@ -32,6 +29,9 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
+
+[sub_resource type="Animation" id="Animation_pqgp3"]
+resource_name = "attack"
 
 [sub_resource type="Animation" id="Animation_4ad2a"]
 resource_name = "walk"

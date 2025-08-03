@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=3 format=3 uid="uid://bdlef15notvmf"]
+
+[ext_resource type="Script" uid="uid://v5wtpe7mpgpu" path="res://Scenes/Upgrade/upgrade.gd" id="1_5c0pe"]
+[ext_resource type="Texture2D" uid="uid://7hab0jpsmglh" path="res://icon.svg" id="1_475ww"]
+
+[resource]
+script = ExtResource("1_5c0pe")
+description = "Damage lower but speed 2x"
+icon = ExtResource("1_475ww")
+effect_type = "speed"
+effect_value = 2.0
+side_effect_type = "dmg"
+side_effect_valu = 0.5
+metadata/_custom_type_script = "uid://v5wtpe7mpgpu"

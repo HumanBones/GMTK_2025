@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://cs31oac0cd7l1"]
+[gd_scene load_steps=16 format=4 uid="uid://cs31oac0cd7l1"]
 
 [ext_resource type="PackedScene" uid="uid://crwyrlb1rl3i3" path="res://Scenes/Player/player.tscn" id="1_t1gg8"]
 [ext_resource type="PackedScene" uid="uid://dxo1i3xrycwbj" path="res://Scenes/Camera/main_cam.tscn" id="2_yp2ti"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://bsgjsbkb5m1br" path="res://Scenes/UI/HearthUI/health_ui.tscn" id="6_adcqc"]
 [ext_resource type="Texture2D" uid="uid://0qbfj085bvtb" path="res://Assets/Bullet/2d_lights_and_shadows_neutral_point_light.webp" id="8_fcotr"]
 [ext_resource type="AudioStream" uid="uid://duu4yxtp0x3pw" path="res://Assets/SFX/TremLoadingloopl.wav" id="10_ugf0j"]
+[ext_resource type="AudioStream" uid="uid://n5chnqs5nmdk" path="res://Assets/SFX/Rifleprimary2.wav" id="11_0ph6x"]
+[ext_resource type="Script" uid="uid://bu68dj3bse27b" path="res://Scenes/World/audio_stream_player_2d.gd" id="12_pvt60"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y0d6x"]
 texture = ExtResource("5_fcotr")
@@ -118,14 +120,20 @@ texture_region_size = Vector2i(32, 32)
 5:6/0 = 0
 6:6/0 = 0
 7:6/0 = 0
+7:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(16, -16, -16, -16, -16, 16, 16, 16)
 8:6/0 = 0
+8:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(16, -16, -16, -16, -16, 16, 16, 16, 16, -16)
 9:6/0 = 0
+9:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 10:6/0 = 0
+10:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 11:6/0 = 0
 12:6/0 = 0
 13:6/0 = 0
+13:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 14:6/0 = 0
 15:6/0 = 0
+15:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:7/0 = 0
 1:7/0 = 0
 2:7/0 = 0
@@ -142,6 +150,7 @@ texture_region_size = Vector2i(32, 32)
 13:7/0 = 0
 14:7/0 = 0
 15:7/0 = 0
+15:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:8/0 = 0
 1:8/0 = 0
 2:8/0 = 0
@@ -158,6 +167,7 @@ texture_region_size = Vector2i(32, 32)
 13:8/0 = 0
 14:8/0 = 0
 15:8/0 = 0
+15:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16, -16, -16, -16, -16, 16, -16, 16, -16)
 0:9/0 = 0
 1:9/0 = 0
 2:9/0 = 0
@@ -174,6 +184,7 @@ texture_region_size = Vector2i(32, 32)
 13:9/0 = 0
 14:9/0 = 0
 15:9/0 = 0
+15:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:10/0 = 0
 1:10/0 = 0
 2:10/0 = 0
@@ -190,6 +201,7 @@ texture_region_size = Vector2i(32, 32)
 13:10/0 = 0
 14:10/0 = 0
 15:10/0 = 0
+15:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:11/0 = 0
 1:11/0 = 0
 2:11/0 = 0
@@ -201,6 +213,7 @@ texture_region_size = Vector2i(32, 32)
 8:11/0 = 0
 9:11/0 = 0
 10:11/0 = 0
+10:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 11:11/0 = 0
 12:11/0 = 0
 13:11/0 = 0
@@ -212,11 +225,13 @@ texture_region_size = Vector2i(32, 32)
 3:12/0 = 0
 4:12/0 = 0
 5:12/0 = 0
+5:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, -16, -16, 16, -16, 16, -16, 16, -16, 16, 8, 16, 8, 16, 16, 16, 16, -16, 16, -16, 16)
 6:12/0 = 0
 7:12/0 = 0
 8:12/0 = 0
 9:12/0 = 0
 10:12/0 = 0
+10:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16, -16, -16, -16, -16, -16, -16, -16, -16, -16, -16, -16, -16, -8, -16, -8, -16, -16, -16)
 11:12/0 = 0
 12:12/0 = 0
 13:12/0 = 0
@@ -228,11 +243,13 @@ texture_region_size = Vector2i(32, 32)
 3:13/0 = 0
 4:13/0 = 0
 5:13/0 = 0
+5:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16, -16, -16, 16, -16)
 6:13/0 = 0
 7:13/0 = 0
 8:13/0 = 0
 9:13/0 = 0
 10:13/0 = 0
+10:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 11:13/0 = 0
 12:13/0 = 0
 13:13/0 = 0
@@ -244,11 +261,13 @@ texture_region_size = Vector2i(32, 32)
 3:14/0 = 0
 4:14/0 = 0
 5:14/0 = 0
+5:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, -16, -16, 16, -16, 16, -16, 16, 16, 16, 16, -16, 16, -16, 16, -16, -16, -16, -16)
 6:14/0 = 0
 7:14/0 = 0
 8:14/0 = 0
 9:14/0 = 0
 10:14/0 = 0
+10:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16, -16, -16)
 11:14/0 = 0
 12:14/0 = 0
 13:14/0 = 0
@@ -260,11 +279,18 @@ texture_region_size = Vector2i(32, 32)
 3:15/0 = 0
 4:15/0 = 0
 5:15/0 = 0
+5:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:15/0 = 0
+6:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16, -16, -16)
 7:15/0 = 0
+7:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 8:15/0 = 0
+8:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, -16, -16, -16, -16)
+8:15/0/physics_layer_0/polygon_1/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 9:15/0 = 0
+9:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 10:15/0 = 0
+10:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 11:15/0 = 0
 12:15/0 = 0
 13:15/0 = 0
@@ -380,6 +406,10 @@ texture = ExtResource("8_fcotr")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_ugf0j")
 autoplay = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_0ph6x")
+script = ExtResource("12_pvt60")
 
 [connection signal="clear" from="Player" to="CanvasLayer/HealthUI" method="clear_list"]
 [connection signal="dmg_taken" from="Player" to="CanvasLayer/HealthUI" method="hp_lowered"]
