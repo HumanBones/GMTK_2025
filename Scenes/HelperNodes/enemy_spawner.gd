@@ -53,7 +53,7 @@ func get_spawn_point() -> Vector2:
 	new_point = global_position
 	return new_point
 
-func next_wave() ->void:
+func next_wave(wave : float) ->void:
 	timer.start()
 	spawned_enemies = 0
 	finished = false

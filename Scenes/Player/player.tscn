@@ -102,7 +102,7 @@ dmg_shake_amount = 2.0
 [node name="AttackManager" parent="." node_paths=PackedStringArray("parent", "shoot_position") instance=ExtResource("4_mtuoh")]
 bullet = ExtResource("5_htcer")
 parent = NodePath("..")
-max_dmg = 1.0
+max_dmg = 5.0
 attack_speed = 0.5
 shoot_position = NodePath("../Marker2D")
 bullet_speed = 900.0
