@@ -13,6 +13,7 @@ var is_spawning_finished : bool = false
 
 func _ready() -> void:
 	GameManager.pause.connect(clear_enemies)
+	GameManager.looping.connect(reset_wave_count)
 
 func add_spawner(spawner : EnemySpawner) ->void:
 	spawner_list.append(spawner)
@@ -46,3 +47,8 @@ func clear_enemies() ->void:
 		enemy.queue_free()
 	
 	enemy_list.clear()
+
+func reset_wave_count() ->void:
+	cur_wave = 0
+	enemy_kill_count = 0
+	enemy_killed.emit(enemy_kill_count)

@@ -311,6 +311,15 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-1073, -323, 4800, -288
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="Wave" parent="CanvasLayer" instance=ExtResource("4_y0d6x")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="PowerUP" parent="CanvasLayer" instance=ExtResource("5_l1hd3")]
 visible = false
 
@@ -318,8 +327,6 @@ visible = false
 
 [node name="LoopingDialog" parent="CanvasLayer" instance=ExtResource("3_fcotr")]
 visible = false
-
-[node name="Wave" parent="CanvasLayer" instance=ExtResource("4_y0d6x")]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(51, 2)
@@ -346,7 +353,7 @@ position = Vector2(-187, -479)
 navigation_polygon = SubResource("NavigationPolygon_yp2ti")
 
 [node name="EnemySpawner" parent="." instance=ExtResource("3_vadfg")]
-position = Vector2(-225, -170)
+position = Vector2(-225, 907)
 enemy_to_spawn = 5
 spawn_rate = 2.0
 

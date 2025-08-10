@@ -14,21 +14,21 @@ class_name Upgrade
 func apply_upgrade() ->void:
 	match effect_type:
 		"dmg":
-			UpgradeManager.dmg(effect_value,self)
+			UpgradeManager.dmg(effect_value,self,false)
 			if side_effect_type == "hp":
-				UpgradeManager.hp(int(side_effect_valu),self)
+				UpgradeManager.hp(int(side_effect_valu),self,true)
 			else:
 				pass
 		"speed":
-			UpgradeManager.speed(effect_value,self)
+			UpgradeManager.speed(effect_value,self,false)
 			if side_effect_type == "dmg":
-				UpgradeManager.dmg(side_effect_valu,self)
+				UpgradeManager.dmg(side_effect_valu,self,true)
 			else:
 				pass
 		"attack_speed":
-			UpgradeManager.attack_speed(effect_value,self)
+			UpgradeManager.attack_speed(effect_value,self,false)
 			if side_effect_type == "speed":
-				UpgradeManager.speed(side_effect_valu,self)
+				UpgradeManager.speed(side_effect_valu,self,true)
 			else:
 				pass
 			

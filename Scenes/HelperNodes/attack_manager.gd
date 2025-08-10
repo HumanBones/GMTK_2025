@@ -8,6 +8,8 @@ class_name AttackManager
 @export var attack_speed : float
 @export var shoot_position : Marker2D
 @export var bullet_speed : float
+@export var min_attack_speed : float
+@export var limit_dmg : float
 
 @onready var timer: Timer = $Timer
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
@@ -44,14 +46,20 @@ func spawn_bullet(dir : Vector2) ->void:
 
 func set_attack_speed(amount : float) ->void:
 	attack_speed /= amount
+	if attack_speed < min_attack_speed:
+		attack_speed = min_attack_speed
 	timer.wait_time = attack_speed
 
 func set_dmg(amount : float) ->void:
 	max_dmg *= amount
-	dmg = max_dmg
-	if dmg < 0:
+	
+	if max_dmg > limit_dmg:
+		max_dmg = limit_dmg
+		
+	if max_dmg < 1:
 		max_dmg = 1
-		dmg = max_dmg
+		
+	dmg = max_dmg
 
 func _on_timer_timeout() -> void:
 	can_attack = true

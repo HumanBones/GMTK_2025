@@ -74,6 +74,7 @@ collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_a3d8c")
 max_speed = 400.0
+limit_speed = 1000.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(4, 4)
@@ -102,10 +103,12 @@ dmg_shake_amount = 2.0
 [node name="AttackManager" parent="." node_paths=PackedStringArray("parent", "shoot_position") instance=ExtResource("4_mtuoh")]
 bullet = ExtResource("5_htcer")
 parent = NodePath("..")
-max_dmg = 5.0
+max_dmg = 1.0
 attack_speed = 0.5
 shoot_position = NodePath("../Marker2D")
 bullet_speed = 900.0
+min_attack_speed = 0.1
+limit_dmg = 6.0
 
 [node name="UpgradeManager" type="Node2D" parent="." node_paths=PackedStringArray("health_manager", "player", "attack_manager") groups=["PlayerUpgradeManager"]]
 script = ExtResource("6_dd0ac")

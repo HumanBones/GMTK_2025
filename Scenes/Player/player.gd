@@ -11,6 +11,7 @@ signal reset
 signal clear
 
 @export var max_speed : float
+@export var limit_speed : float
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -116,6 +117,8 @@ func die() ->void:
 	
 func set_speed(amount : float) ->void:
 	max_speed *= amount
+	if max_speed > limit_speed:
+		max_speed = limit_speed
 	speed = max_speed
 
 func clear_ui() ->void:

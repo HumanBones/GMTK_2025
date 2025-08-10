@@ -13,7 +13,8 @@ func _ready() -> void:
 
 func label_text(amount : int) ->void:
 	show()
-	label.text = "Next wave " + str(amount)
+	label.text = "Next wave"
+	animation_player.play("fade_out_label")
 	
 func hide_self() ->void:
 	hide()

@@ -23,7 +23,7 @@ grow_vertical = 2
 script = ExtResource("1_y56qg")
 upgrade_list = Array[ExtResource("2_8sdda")]([ExtResource("3_usyle"), ExtResource("4_6b7w3"), ExtResource("5_qkc2v")])
 curse_list = Array[ExtResource("2_8sdda")]([ExtResource("3_smbx3"), ExtResource("6_qkc2v"), ExtResource("8_mplem")])
-curse_chance = 0.3
+curse_chance = 1.0
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
